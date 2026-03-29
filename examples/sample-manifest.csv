@@ -1,0 +1,4 @@
+audio_id,audio_path,filename,duration,source_dataset,license,split,tags_raw,candidate_caption,notes,created_at
+pad-001,audio\pad-001.wav,pad-001.wav,4.2,internal-prototype,research-only,train,"pad|warm|dreamy","Warm evolving synth pad with a soft attack and airy tail.","Good candidate for ambient prompt tests.",2026-03-01T09:00:00Z
+fx-rise-014,audio\fx-rise-014.wav,fx-rise-014.wav,2.1,internal-prototype,research-only,val,"fx|transition|cinematic","Short metallic rise that swells into a bright impact.","Check whether the rise feels more synthetic or hybrid.",2026-03-01T09:00:00Z
+texture-032,audio\texture-032.wav,texture-032.wav,5.8,field-curation,cc-by,train,"texture|noisy|eerie","Noisy evolving texture with distant metallic resonance.","May need review for clarity because the source recording is dense.",2026-03-01T09:00:00Z

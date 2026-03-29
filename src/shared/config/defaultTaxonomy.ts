@@ -1,0 +1,71 @@
+import type { TaxonomyConfig } from '../types/domain';
+
+const defaultTaxonomy: TaxonomyConfig = {
+  soundTypes: [
+    'pad',
+    'bass',
+    'lead',
+    'fx',
+    'percussion',
+    'vocal',
+    'ambience',
+    'texture',
+    'transition',
+    'loop',
+    'one-shot',
+    'field-recording',
+    'other'
+  ],
+  moods: [
+    'dark',
+    'warm',
+    'tense',
+    'dreamy',
+    'melancholic',
+    'aggressive',
+    'eerie',
+    'uplifting',
+    'calm',
+    'cinematic',
+    'playful'
+  ],
+  timbres: [
+    'distorted',
+    'clean',
+    'airy',
+    'metallic',
+    'lo-fi',
+    'punchy',
+    'smooth',
+    'noisy',
+    'harsh',
+    'soft',
+    'resonant',
+    'saturated'
+  ],
+  motions: [
+    'static',
+    'evolving',
+    'rhythmic',
+    'pulsing',
+    'swelling',
+    'stuttered',
+    'sustained',
+    'transient-heavy'
+  ],
+  useCases: [
+    'trap',
+    'ambient',
+    'cinematic',
+    'horror',
+    'game',
+    'trailer',
+    'transition',
+    'background',
+    'experimental',
+    'pop',
+    'electronic'
+  ]
+};
+
+export default defaultTaxonomy;

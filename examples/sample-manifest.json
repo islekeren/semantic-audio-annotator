@@ -1,0 +1,28 @@
+[
+  {
+    "audio_id": "pad-001",
+    "audio_path": "audio/pad-001.wav",
+    "filename": "pad-001.wav",
+    "duration": 4.2,
+    "source_dataset": "internal-prototype",
+    "license": "research-only",
+    "split": "train",
+    "tags_raw": ["pad", "warm", "dreamy"],
+    "candidate_caption": "Warm evolving synth pad with a soft attack and airy tail.",
+    "notes": "Good candidate for ambient prompt tests.",
+    "created_at": "2026-03-01T09:00:00Z"
+  },
+  {
+    "audio_id": "fx-rise-014",
+    "audio_path": "audio/fx-rise-014.wav",
+    "filename": "fx-rise-014.wav",
+    "duration": 2.1,
+    "source_dataset": "internal-prototype",
+    "license": "research-only",
+    "split": "val",
+    "tags_raw": ["fx", "transition", "cinematic"],
+    "candidate_caption": "Short metallic rise that swells into a bright impact.",
+    "notes": "Check whether the rise feels more synthetic or hybrid.",
+    "created_at": "2026-03-01T09:00:00Z"
+  }
+]
