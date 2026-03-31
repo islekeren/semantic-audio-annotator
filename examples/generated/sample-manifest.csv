@@ -1,0 +1,4 @@
+audio_id,audio_path,filename,duration,source_dataset,license,split,tags_raw,candidate_caption,notes,created_at
+tone-low-001,audio/tone-low.wav,tone-low.wav,1.8,generated-demo,cc0,train,"tone|sine|low","Steady low sine tone with a clean synthetic character.","Generated locally with ffmpeg for import testing.",2026-03-30T08:00:00Z
+beep-short-001,audio/beep-short.wav,beep-short.wav,0.45,generated-demo,cc0,val,"beep|short|alert","Short high-pitched beep with a quick fade out.","Useful for testing very short clips and navigation flow.",2026-03-30T08:00:00Z
+noise-soft-001,audio/noise-soft.wav,noise-soft.wav,2.4,generated-demo,cc0,train,"noise|pink|soft","Soft filtered noise with a gentle, diffuse texture.","Generated as a simple non-tonal example for tagging and review.",2026-03-30T08:00:00Z

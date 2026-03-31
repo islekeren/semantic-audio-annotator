@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { useAppStore } from '../../app/useAppStore';
 import defaultTaxonomy from '../../shared/config/defaultTaxonomy';
 import type { TaxonomyConfig } from '../../shared/types/domain';
 
 export function SettingsScreen() {
-  const { settings, taxonomy, storagePath, userDataPath, saveSettings, saveTaxonomy } = useAppStore((state) => ({
-    settings: state.settings,
-    taxonomy: state.taxonomy,
-    storagePath: state.storagePath,
-    userDataPath: state.userDataPath,
-    saveSettings: state.saveSettings,
-    saveTaxonomy: state.saveTaxonomy
-  }));
+  const { settings, taxonomy, storagePath, userDataPath, saveSettings, saveTaxonomy } = useAppStore(
+    useShallow((state) => ({
+      settings: state.settings,
+      taxonomy: state.taxonomy,
+      storagePath: state.storagePath,
+      userDataPath: state.userDataPath,
+      saveSettings: state.saveSettings,
+      saveTaxonomy: state.saveTaxonomy
+    }))
+  );
 
   const [audioBaseDirectory, setAudioBaseDirectory] = useState(settings.audioBaseDirectory ?? '');
   const [exportDirectory, setExportDirectory] = useState(settings.exportDirectory ?? '');

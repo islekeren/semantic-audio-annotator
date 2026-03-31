@@ -1,0 +1,35 @@
+[
+  {
+    "audio_id": "tone-low-001",
+    "audio_path": "audio/tone-low.wav",
+    "filename": "tone-low.wav",
+    "duration": 1.8,
+    "source_dataset": "generated-demo",
+    "license": "cc0",
+    "split": "train",
+    "notes": "Generated locally with ffmpeg for import testing.",
+    "created_at": "2026-03-30T08:00:00Z"
+  },
+  {
+    "audio_id": "beep-short-001",
+    "audio_path": "audio/beep-short.wav",
+    "filename": "beep-short.wav",
+    "duration": 0.45,
+    "source_dataset": "generated-demo",
+    "license": "cc0",
+    "split": "val",
+    "notes": "Useful for testing very short clips and navigation flow.",
+    "created_at": "2026-03-30T08:00:00Z"
+  },
+  {
+    "audio_id": "noise-soft-001",
+    "audio_path": "audio/noise-soft.wav",
+    "filename": "noise-soft.wav",
+    "duration": 2.4,
+    "source_dataset": "generated-demo",
+    "license": "cc0",
+    "split": "train",
+    "notes": "Generated as a simple non-tonal example for tagging and review.",
+    "created_at": "2026-03-30T08:00:00Z"
+  }
+]

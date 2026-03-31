@@ -26,12 +26,13 @@ export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(funct
   useEffect(() => {
     setCurrentTime(0);
     setDuration(durationHint ?? 0);
+    setAudioUrl('');
     setIsPlaying(false);
     setError(null);
 
     let cancelled = false;
     void window.desktop
-      .toFileUrl(audioPath)
+      .toMediaUrl(audioPath)
       .then((url) => {
         if (!cancelled) {
           setAudioUrl(url);
@@ -55,7 +56,7 @@ export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(funct
       }
 
       if (audioRef.current?.paused) {
-        void audioRef.current.play();
+        void playAudio();
       } else {
         audioRef.current?.pause();
       }
@@ -63,10 +64,23 @@ export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(funct
     restart: () => {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        void audioRef.current.play();
+        void playAudio();
       }
     }
   }));
+
+  async function playAudio() {
+    if (!audioRef.current) {
+      return;
+    }
+
+    try {
+      setError(null);
+      await audioRef.current.play();
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'This file could not be played by the embedded audio engine.');
+    }
+  }
 
   function handleSeek(value: number) {
     if (!audioRef.current) {
@@ -82,7 +96,7 @@ export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(funct
     }
 
     if (audioRef.current?.paused) {
-      void audioRef.current.play();
+      void playAudio();
       return;
     }
 

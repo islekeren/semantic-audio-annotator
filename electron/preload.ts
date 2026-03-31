@@ -26,7 +26,7 @@ const api: DesktopApi = {
   commitImport: (request: CommitImportRequest) => ipcRenderer.invoke('import:commit', request),
   exportDataset: (request: ExportRequest): Promise<ExportResult | null> =>
     ipcRenderer.invoke('export:run', request),
-  toFileUrl: (filePath: string) => ipcRenderer.invoke('path:toFileUrl', filePath)
+  toMediaUrl: (filePath: string) => ipcRenderer.invoke('path:toMediaUrl', filePath)
 };
 
 contextBridge.exposeInMainWorld('desktop', api);

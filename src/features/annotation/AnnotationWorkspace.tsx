@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Search } from 'lucide-react';
+import { useShallow } from 'zustand/react/shallow';
 import { useAppStore } from '../../app/useAppStore';
 import type { AnnotationStatus } from '../../shared/types/domain';
 import { AnnotationEditor, type AnnotationEditorHandle } from './AnnotationEditor';
@@ -31,20 +32,22 @@ export function AnnotationWorkspace({ mode }: AnnotationWorkspaceProps) {
     selectSample,
     saveAnnotation,
     setNavigationGuard
-  } = useAppStore((state) => ({
-    filters: state.filters,
-    samples: state.samples,
-    currentSample: state.currentSample,
-    currentSampleId: state.currentSampleId,
-    settings: state.settings,
-    taxonomy: state.taxonomy,
-    stats: state.stats,
-    sources: state.sources,
-    setFilters: state.setFilters,
-    selectSample: state.selectSample,
-    saveAnnotation: state.saveAnnotation,
-    setNavigationGuard: state.setNavigationGuard
-  }));
+  } = useAppStore(
+    useShallow((state) => ({
+      filters: state.filters,
+      samples: state.samples,
+      currentSample: state.currentSample,
+      currentSampleId: state.currentSampleId,
+      settings: state.settings,
+      taxonomy: state.taxonomy,
+      stats: state.stats,
+      sources: state.sources,
+      setFilters: state.setFilters,
+      selectSample: state.selectSample,
+      saveAnnotation: state.saveAnnotation,
+      setNavigationGuard: state.setNavigationGuard
+    }))
+  );
 
   const playerRef = useRef<AudioPlayerHandle | null>(null);
   const editorRef = useRef<AnnotationEditorHandle | null>(null);

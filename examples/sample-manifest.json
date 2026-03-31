@@ -1,8 +1,8 @@
 [
   {
     "audio_id": "pad-001",
-    "audio_path": "audio/pad-001.wav",
-    "filename": "pad-001.wav",
+    "audio_path": "audio/random.wav",
+    "filename": "random.wav",
     "duration": 4.2,
     "source_dataset": "internal-prototype",
     "license": "research-only",
@@ -14,8 +14,8 @@
   },
   {
     "audio_id": "fx-rise-014",
-    "audio_path": "audio/fx-rise-014.wav",
-    "filename": "fx-rise-014.wav",
+    "audio_path": "audio/pickupCoin.wav",
+    "filename": "pickupCoin.wav",
     "duration": 2.1,
     "source_dataset": "internal-prototype",
     "license": "research-only",

@@ -49,5 +49,5 @@ export interface DesktopApi {
   previewImport(request: PreviewImportRequest): Promise<ImportPreviewResult>;
   commitImport(request: CommitImportRequest): Promise<ImportCommitResult>;
   exportDataset(request: ExportRequest): Promise<ExportResult | null>;
-  toFileUrl(filePath: string): Promise<string>;
+  toMediaUrl(filePath: string): Promise<string>;
 }

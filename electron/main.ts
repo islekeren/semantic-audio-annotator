@@ -1,6 +1,7 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { app, BrowserWindow, dialog, ipcMain, type OpenDialogOptions } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, net, protocol, type OpenDialogOptions } from 'electron';
 import type { BootstrapPayload, SaveAnnotationInput } from '../src/shared/types/domain';
 import type { CommitImportRequest, ExportRequest, PreviewImportRequest } from '../src/shared/types/ipc';
 import { AppDatabase } from './database/AppDatabase';
@@ -8,6 +9,20 @@ import { ExportService } from './services/exportService';
 import { ImportService } from './services/importService';
 
 let mainWindow: BrowserWindow | null = null;
+const LOCAL_MEDIA_SCHEME = 'local-media';
+
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: LOCAL_MEDIA_SCHEME,
+    privileges: {
+      standard: true,
+      secure: true,
+      supportFetchAPI: true,
+      corsEnabled: true,
+      stream: true
+    }
+  }
+]);
 
 const databasePath = path.join(app.getPath('userData'), 'semantic-audio-annotator.sqlite');
 const database = new AppDatabase(databasePath);
@@ -35,6 +50,32 @@ function createWindow(): void {
     void mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL ?? 'http://127.0.0.1:5173');
     mainWindow.webContents.openDevTools({ mode: 'detach' });
   }
+}
+
+function createLocalMediaUrl(filePath: string): string {
+  return `${LOCAL_MEDIA_SCHEME}://audio?path=${encodeURIComponent(filePath)}`;
+}
+
+function registerLocalMediaProtocol(): void {
+  protocol.handle(LOCAL_MEDIA_SCHEME, (request) => {
+    const requestUrl = new URL(request.url);
+    const filePath = requestUrl.searchParams.get('path');
+
+    if (!filePath) {
+      return new Response('Missing media path.', { status: 400 });
+    }
+
+    const normalizedPath = path.normalize(filePath);
+    if (!path.isAbsolute(normalizedPath)) {
+      return new Response('Media path must be absolute.', { status: 400 });
+    }
+
+    if (!fs.existsSync(normalizedPath) || !fs.statSync(normalizedPath).isFile()) {
+      return new Response('Media file not found.', { status: 404 });
+    }
+
+    return net.fetch(pathToFileURL(normalizedPath).toString());
+  });
 }
 
 function registerIpcHandlers(): void {
@@ -95,10 +136,11 @@ function registerIpcHandlers(): void {
     }
     return exportService.exportDataset(mainWindow, request);
   });
-  ipcMain.handle('path:toFileUrl', (_event, filePath: string) => pathToFileURL(filePath).toString());
+  ipcMain.handle('path:toMediaUrl', (_event, filePath: string) => createLocalMediaUrl(filePath));
 }
 
 app.whenReady().then(() => {
+  registerLocalMediaProtocol();
   registerIpcHandlers();
   createWindow();
 

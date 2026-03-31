@@ -7,6 +7,7 @@ import {
   ListChecks,
   Settings as SettingsIcon
 } from 'lucide-react';
+import { useShallow } from 'zustand/react/shallow';
 import { useAppStore, type Screen } from './app/useAppStore';
 import { ImportScreen } from './features/dataset/ImportScreen';
 import { AnnotationWorkspace } from './features/annotation/AnnotationWorkspace';
@@ -39,17 +40,19 @@ export default function App() {
     navigationGuard,
     stats,
     errorMessage
-  } = useAppStore((state) => ({
-    initialize: state.initialize,
-    initialized: state.initialized,
-    isBusy: state.isBusy,
-    screen: state.screen,
-    setScreen: state.setScreen,
-    setFilters: state.setFilters,
-    navigationGuard: state.navigationGuard,
-    stats: state.stats,
-    errorMessage: state.errorMessage
-  }));
+  } = useAppStore(
+    useShallow((state) => ({
+      initialize: state.initialize,
+      initialized: state.initialized,
+      isBusy: state.isBusy,
+      screen: state.screen,
+      setScreen: state.setScreen,
+      setFilters: state.setFilters,
+      navigationGuard: state.navigationGuard,
+      stats: state.stats,
+      errorMessage: state.errorMessage
+    }))
+  );
 
   useEffect(() => {
     void initialize();
